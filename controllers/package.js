@@ -1,4 +1,4 @@
-const { collection, getDocs } = require("firebase/firestore");
+const { doc, collection, getDocs, getDoc } = require("firebase/firestore");
 const db = require("../config");
 
 const getPackage = async (req, res) => {
@@ -13,4 +13,19 @@ const getPackage = async (req, res) => {
     }
 }
 
-module.exports = getPackage;
+const getPackageById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const docRef = doc(db, "packages", id);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+            console.log(docSnap.data());
+            res.json(docSnap.data());
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+
+module.exports = { getPackage, getPackageById };
