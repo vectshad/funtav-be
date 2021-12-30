@@ -5,7 +5,9 @@ const getPackage = async (req, res) => {
     try {
         const docRef = collection(db, "packages");
         const docSnap = await getDocs(docRef);
-        const list = docSnap.docs.map((doc) =>doc.data());
+        const list = docSnap.docs.map((doc) =>{
+            return { id: doc.id, ...doc.data() }
+        });
         console.log(list);
         res.json(list);
     } catch (error) {
