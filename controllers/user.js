@@ -1,4 +1,4 @@
-const { collection, addDoc } = require("firebase/firestore");
+const { doc, collection, addDoc, getDocs, query, where } = require("firebase/firestore");
 const db = require("../config");
 
 const createUser = async (req, res) => {
@@ -11,4 +11,22 @@ const createUser = async (req, res) => {
     }
 }
 
-module.exports = createUser;
+const userValidate = async (req, res) => {
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
+        console.log(username, password);
+        const q = query(collection(db, "users"), where("username", "==", username));
+        const querySnap = await getDocs(q);
+        const list = querySnap.docs.map((doc) =>doc.data());
+
+        if (list.length === 1) {
+            console.log(list);
+            res.json(list[0]);
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message}) 
+    }
+}
+
+module.exports = { createUser, userValidate };
