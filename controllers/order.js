@@ -11,6 +11,30 @@ const createOrder = async (req, res) => {
     }
 }
 
+const createCustomOrder = async (req, res) => {
+    try {
+        const data = req.body;
+        const docRef = await addDoc(collection(db, "custom_orders"), data);
+        res.send({message: `New Order Added ${docRef.id}`});
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+
+const getCustomOrder = async (req, res) => {
+    try {
+        const docRef = collection(db, "custom_orders");
+        const docSnap = await getDocs(docRef);
+        const list = docSnap.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() }
+        });
+        console.log(list);
+        res.json(list);
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+
 const getOrder = async (req, res) => {
     try {
         const docRef = collection(db, "orders");
@@ -58,4 +82,4 @@ const getOrderByUserId = async (req, res) => {
     }
 }
 
-module.exports = { createOrder, getOrder, getOrderById, getOrderByUserId };
+module.exports = { createOrder, getOrder, getOrderById, getOrderByUserId, createCustomOrder, getCustomOrder };
