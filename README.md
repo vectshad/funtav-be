@@ -1,4 +1,4 @@
-# Fun Tav Travel and Tour
+# Fun Tav Travel and Tour Backend
 
 ## Available Scripts
 
