@@ -18,7 +18,9 @@ const userValidate = async (req, res) => {
         console.log(username, password);
         const q = query(collection(db, "users"), where("username", "==", username), where("password", "==", password));
         const querySnap = await getDocs(q);
-        const list = querySnap.docs.map((doc) =>doc.data());
+        const list = querySnap.docs.map((doc) =>{
+            return { id: doc.id, ...doc.data() }
+        });
 
         if (list.length === 1) {
             console.log(list);
