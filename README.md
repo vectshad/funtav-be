@@ -19,7 +19,7 @@ You may also see any lint errors in the console.
 ### Database
 
 Use firestore for database \
-Collections: \
+Collections: 
 - users 
 - orders 
 - packages 
@@ -30,7 +30,7 @@ Collections: \
 Deployed use heroku
 
 #### API
-GET: \
+GET: 
 - get all packages: https://funtav-api.herokuapp.com/package
 - get package by id: https://funtav-api.herokuapp.com/package/:id
 - get all orders: https://funtav-api.herokuapp.com/order
@@ -38,7 +38,7 @@ GET: \
 - get order by user id: https://funtav-api.herokuapp.com/order/user/:id
 - get all custom order: https://funtav-api.herokuapp.com/orders
 
-POST: \
+POST: 
 - create custom order: https://funtav-api.herokuapp.com/order/custom
 - validate user: https://funtav-api.herokuapp.com/user/validate
 - create user https://funtav-api.herokuapp.com/user
